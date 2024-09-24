@@ -20,4 +20,3 @@ libraryDependencies ++= Seq(
 libraryDependencies += "com.typesafe.play" %% "play-slick" % "5.3.0"
 libraryDependencies += "org.postgresql" % "postgresql" % "42.7.3"
 libraryDependencies += "com.typesafe.play" %% "play-slick-evolutions" % "5.3.0"
-libraryDependencies += "com.typesafe.slick" %% "slick-hikaricp" % "3.3.3"
