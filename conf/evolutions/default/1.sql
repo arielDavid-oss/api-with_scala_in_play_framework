@@ -7,3 +7,12 @@ CREATE TABLE products (
                           image VARCHAR
 );
 
+CREATE TABLE users (
+                       id SERIAL PRIMARY KEY,
+                       username VARCHAR NOT NULL UNIQUE,
+                       email VARCHAR NOT NULL,
+                       password VARCHAR NOT NULL
+);
+
+INSERT INTO users (username, email, password)
+VALUES ('usuario123', 'usuario@example.com', 'password123');

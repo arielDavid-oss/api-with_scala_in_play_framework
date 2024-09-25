@@ -1,5 +1,83 @@
 @()
 
 @main("Welcome to Play") {
-  <h1>Welcome to Play!</h1>
+<!DOCTYPE html>
+  <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Página de Bienvenida</title>
+      <style>
+              /* Estilos generales */
+              * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Arial', sans-serif;
+              }
+
+              /* Contenedor principal de la página de bienvenida */
+              .welcome-container {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color:#0056b3;
+                background-size: cover;
+                background-position: center;
+                color: white;
+                text-align: center;
+                padding: 20px;
+              }
+
+              /* Estilos para el mensaje de bienvenida */
+              .welcome-message {
+                background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+                border-radius: 10px;
+                padding: 30px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+              }
+
+              /* Estilo del título */
+              h1 {
+                font-size: 3em;
+                margin-bottom: 20px;
+              }
+
+              /* Estilo del párrafo */
+              p {
+                font-size: 1.2em;
+                margin-bottom: 20px;
+              }
+
+              /* Estilo del botón */
+              .explore-button {
+                display: inline-block;
+                padding: 10px 20px;
+                font-size: 1em;
+                color: white;
+                background-color: #007BFF; /* Color del botón */
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s;
+              }
+
+              /* Estilo del botón al pasar el mouse */
+              .explore-button:hover {
+                background-color: #0056b3; /* Color del botón al pasar el mouse */
+              }
+      </style>
+    </head>
+    <body>
+      <div class="welcome-container">
+        <div class="welcome-message">
+          <h1>¡Bienvenido a Play Framework!</h1>
+          <p>Nos alegra que estés aquí.</p>
+@*          <a href="#explorar" class="explore-button">Explorar</a>*@
+        </div>
+      </div>
+    </body>
+  </html>
+
 }
