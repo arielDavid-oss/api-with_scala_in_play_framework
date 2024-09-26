@@ -22,5 +22,7 @@ class ProductDAO @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec
 
   def create(product: Product): Future[Int] = db.run(products += product)
 
+  def update(id: Int, product: Product): Future[Int] = db.run(products.filter(_.id === id).update(product))
+
   def delete(id: Int): Future[Int] = db.run(products.filter(_.id === id).delete)
 }

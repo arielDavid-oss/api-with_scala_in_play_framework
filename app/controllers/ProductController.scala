@@ -38,6 +38,17 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
     )
   }
 
+  def updateProduct(id: Int): Action[JsValue] = Action.async(parse.json) { request =>
+    request.body.validate[Product].fold(
+      errors => Future.successful(BadRequest(JsError.toJson(errors))),
+      product => {
+        productDAO.update(id, product).map { updatedCount =>
+          if (updatedCount > 0) NoContent else NotFound
+        }
+      }
+    )
+  }
+
   def deleteProduct(id: Int): Action[AnyContent] = Action.async {
     productDAO.delete(id).map { deletedCount =>
       if (deletedCount > 0) NoContent else NotFound
