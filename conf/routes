@@ -9,7 +9,7 @@ GET     /products                   controllers.ProductController.getProducts
 GET     /products/:id               controllers.ProductController.getProduct(id: Int)
 POST    /products                   controllers.ProductController.createProduct
 DELETE  /products/:id               controllers.ProductController.deleteProduct(id: Int)
-
+PUT     /productsactu/:id               controllers.ProductController.updateProduct(id: Int)
 
 # Rutas para usuarios
 #GET     /api/usuarios/:id           controllers.UserController.getUsuario(id: Long)  # Ruta para obtener un usuario específico

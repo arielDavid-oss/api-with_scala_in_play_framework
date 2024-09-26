@@ -42,8 +42,12 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
     request.body.validate[Product].fold(
       errors => Future.successful(BadRequest(JsError.toJson(errors))),
       product => {
-        productDAO.update(id, product).map { updatedCount =>
-          if (updatedCount > 0) NoContent else NotFound
+        productDAO.getById(id).flatMap {
+          case Some(_) =>
+            productDAO.update(id, product).map { updatedCount =>
+              if (updatedCount > 0) NoContent else NotFound
+            }
+          case None => Future.successful(NotFound(Json.obj("error" -> s"Producto con id $id no encontrado")))
         }
       }
     )
