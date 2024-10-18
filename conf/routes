@@ -3,22 +3,24 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
-GET     /products                   controllers.ProductController.getProducts
-GET     /products/:id               controllers.ProductController.getProduct(id: Int)
-POST    /products                   controllers.ProductController.createProduct
-DELETE  /products/:id               controllers.ProductController.deleteProduct(id: Int)
-PUT     /productsactu/:id               controllers.ProductController.updateProduct(id: Int)
+# Swagger
+GET        /api-docs/swagger.json                           controllers.swagger.ApiSwaggerController.swaggerSpec()
+GET        /                                                controllers.swagger.ApiSwaggerController.swaggerUi
 
-# Rutas para usuarios
-#GET     /api/usuarios/:id           controllers.UserController.getUsuario(id: Long)  # Ruta para obtener un usuario específico
-# Rutas para usuarios
-GET     /usuarios               controllers.UserController.getAllUsuarios
-POST    /usuarios                    controllers.UserController.createUsuario
-POST    /verify                      controllers.UserController.verifyUsuario
+# Home
+GET        /a                           controllers.HomeController.index()
 
-#DELETE  /api/usuarios/:id           controllers.UserController.deleteUsuario(id: Long)  # Ruta para eliminar un usuario específico
+# Product Routes
+GET        /products                   controllers.ProductController.getProducts
+GET        /products/:id               controllers.ProductController.getProduct(id: Int)
+POST       /products                   controllers.ProductController.createProduct
+DELETE     /products/:id               controllers.ProductController.deleteProduct(id: Int)
+PUT        /productsactu/:id           controllers.ProductController.updateProduct(id: Int)
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+# User Routes
+GET        /usuarios                   controllers.UserController.getAllUsuarios
+POST       /usuarios                   controllers.UserController.createUsuario
+POST       /verify                     controllers.UserController.verifyUsuario
+
+# Static Assets
+GET        /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

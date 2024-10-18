@@ -4,21 +4,21 @@ import models.usuarios.{Usuario, UsuarioDAO}
 import org.mindrot.jbcrypt.BCrypt
 import play.api.libs.json._
 import play.api.mvc._
-
 import javax.inject._
 import scala.concurrent.{ExecutionContext, Future}
-
 
 @Singleton
 class UserController @Inject()(cc: ControllerComponents, usuarioDAO: UsuarioDAO)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
+  // Método para obtener todos los usuarios
   def getAllUsuarios: Action[AnyContent] = Action.async {
     usuarioDAO.all().map { usuarios =>
       Ok(Json.toJson(usuarios))
     }.recover {
-      case ex: Exception => InternalServerError(Json.obj("error" -> "Error al obtener los usuarios"))
+      case _: Exception => InternalServerError(Json.obj("error" -> "Error al obtener los usuarios"))
     }
   }
+
   // Método para crear un nuevo usuario
   def createUsuario: Action[JsValue] = Action.async(parse.json) { request =>
     request.body.validate[Usuario].fold(
@@ -31,7 +31,7 @@ class UserController @Inject()(cc: ControllerComponents, usuarioDAO: UsuarioDAO)
         usuarioDAO.create(usuarioConHash).map { _ =>
           Created(Json.toJson(usuarioConHash))
         }.recover {
-          case ex: Exception =>
+          case _: Exception =>
             InternalServerError(Json.obj("status" -> "error", "message" -> "Error creando usuario"))
         }
       }
@@ -57,6 +57,4 @@ class UserController @Inject()(cc: ControllerComponents, usuarioDAO: UsuarioDAO)
         Future.successful(BadRequest(Json.obj("status" -> "error", "message" -> "Missing username or password")))
     }
   }
-
-
 }
