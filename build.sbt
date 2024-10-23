@@ -36,7 +36,7 @@ libraryDependencies ++= swaggerDependencies
 lazy val commonSettings = Seq(
   resolvers += "Nexus Releases" at "https://nexus-ci.qrsof.com/repository/maven-public",
   credentials += Credentials("Sonatype Nexus Repository Manager",
-    "nexus-ci.qrsof.com", "deployment", "4jDzLGNHgaWiWFj"),
+   
   libraryDependencies ++= commonDependencies,
   coverageExcludedPackages := ".*Module.*;.*Module",
   scalacOptions ++= Seq(
