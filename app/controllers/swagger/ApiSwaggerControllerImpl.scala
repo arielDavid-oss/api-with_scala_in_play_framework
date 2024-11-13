@@ -11,9 +11,12 @@ class ApiSwaggerControllerImpl @Inject()(val controllerComponents: ControllerCom
                                         ) extends BaseController with ApiSwaggerController {
 
   def swaggerSpec(): Action[AnyContent] = Action {
-    Ok(swaggerHttpServiceImpl.getJsonSwagger()).as(JSON)
-    val jsonContent = Source.fromFile("conf/swagger.json").getLines().mkString("\n")
-    Ok(jsonContent).as("application/json")
+    // se crea un archivo automaticamente con las anotaciones en los controladores del swagger
+   Ok(swaggerHttpServiceImpl.getJsonSwagger()).as(JSON)
+
+    //con este se lee el archivo json creado manualmente para la documentacion del swagger
+  //  val jsonContent = Source.fromFile("conf/swagger.json").getLines().mkString("\n")
+   // Ok(jsonContent).as("application/json")
   }
 
   def swaggerUi: Action[AnyContent] = Action {

@@ -7,14 +7,23 @@ import models.{ProductDAO, Product}
 import play.api.libs.json._
 import io.swagger.v3.oas.annotations.{Operation, Parameter}
 import io.swagger.v3.oas.annotations.enums.ParameterIn
-import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.media.{Content, Schema}
+import io.swagger.v3.oas.annotations.parameters.RequestBody
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import jakarta.ws.rs.{Consumes, DELETE, GET, POST, PUT, Path, Produces}
+import jakarta.ws.rs.core.MediaType
 
 @Singleton
+@Path("/products")
+@Produces(Array(MediaType.APPLICATION_JSON))
+@Consumes(Array(MediaType.APPLICATION_JSON))
 class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductDAO)(implicit ec: ExecutionContext) extends AbstractController(cc) {
 
+  @GET
+  @Path("/")
   @Operation(
     summary = "Get all products",
+    tags = Array("Productos"),
     responses = Array(
       new ApiResponse(
         responseCode = "200",
@@ -32,8 +41,11 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
     }
   }
 
+  @GET
+  @Path("/{id}")
   @Operation(
     summary = "Get a product by ID",
+    tags = Array("Productos"),
     parameters = Array(
       new Parameter(
         name = "id",
@@ -47,7 +59,7 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
       new ApiResponse(
         responseCode = "200",
         description = "Product details",
-        content = Array(new Content(schema = new Schema(implementation = classOf[Product]))),
+        content = Array(new Content(schema = new Schema(implementation = classOf[Product])))
       ),
       new ApiResponse(responseCode = "404", description = "Product not found"),
       new ApiResponse(responseCode = "500", description = "Internal Server Error")
@@ -62,9 +74,12 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
     }
   }
 
+  @POST
+  @Path("/")
   @Operation(
     summary = "Create a new product",
-    requestBody = new io.swagger.v3.oas.annotations.parameters.RequestBody(
+    tags = Array("Productos"),
+    requestBody = new RequestBody(
       required = true,
       content = Array(
         new Content(schema = new Schema(implementation = classOf[Product]))
@@ -93,8 +108,11 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
     )
   }
 
+  @PUT
+  @Path("/{id}")
   @Operation(
     summary = "Update a product by ID",
+    tags = Array("Productos"),
     parameters = Array(
       new Parameter(
         name = "id",
@@ -104,7 +122,7 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
         schema = new Schema(implementation = classOf[Int])
       )
     ),
-    requestBody = new io.swagger.v3.oas.annotations.parameters.RequestBody(
+    requestBody = new RequestBody(
       required = true,
       content = Array(
         new Content(schema = new Schema(implementation = classOf[Product]))
@@ -134,8 +152,11 @@ class ProductController @Inject()(cc: ControllerComponents, productDAO: ProductD
     )
   }
 
+  @DELETE
+  @Path("/{id}")
   @Operation(
     summary = "Delete a product by ID",
+    tags = Array("Productos"),
     parameters = Array(
       new Parameter(
         name = "id",
